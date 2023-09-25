@@ -4,10 +4,8 @@ import HackerNewsTable from './components/HackerNewsTable';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <HackerNewsTable />
-      </header>
+    <div className="app_body">
+      <HackerNewsTable />
     </div>
   );
 }
