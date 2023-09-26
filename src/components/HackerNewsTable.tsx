@@ -48,12 +48,14 @@ export default function HackerNewsTable() {
     };
 
     const dataRows = currentItems.filter(item => !!item.url).map(item => (
-        <tr key={item.id}>
+        <tr key={item.id} className='item_row'>
             <td>
                 <a href={item.url} target="_blank" rel="noopener noreferrer" className="textlink">{item.title}</a>
             </td>
         </tr>
     ));
+
+    const isNextBtnDisabled = currentPage === Math.ceil(items.length / itemsPerPage);
 
     return (
         <div>
@@ -84,17 +86,17 @@ export default function HackerNewsTable() {
                 </tbody>
                 {!loading && <tfoot>
                     <tr>
-                        <td style={{ display: 'flex', flexDirection: 'row', whiteSpace: 'nowrap' }}>
-                            <div className="gutter" style={{ flex: 3 }}>
+                        <td className="footer_container">
+                            <div className="gutter paginator_container">
                                 <StyledButton onClick={prevPage} disabled={currentPage === 1}>
                                     Previous
                                 </StyledButton>
                                 <span>Page {currentPage}</span>
-                                <StyledButton onClick={nextPage} disabled={currentPage === Math.ceil(items.length / itemsPerPage)}>
+                                <StyledButton onClick={nextPage} disabled={isNextBtnDisabled}>
                                     Next
                                 </StyledButton>
                             </div>
-                            <div className="gutter" style={{ flex: 1 }}>
+                            <div className="gutter refresh_container">
                                 <ReactTooltip id="reload-tooltip" place="bottom" content="Reload Data" />
                                 <StyledButton onClick={reloadData} disabled={loading} icon="refresh" data-tooltip-id="reload-tooltip" />
                             </div>
